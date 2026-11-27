@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GrowDrops - Small rewards. Big steps.">
+    <meta name="description" content="GrowDrops - Small rewards. Big steps. Start your crypto journey with simple rewards.">
     <title>GrowDrops | Small rewards. Big steps.</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -13,50 +14,73 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: #101b18;
             color: #f2f7f3;
-            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         header {
-            padding: 24px 8%;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #294137;
+            flex-wrap: wrap;
+            gap: 18px;
         }
 
         .logo {
-            font-size: 26px;
+            font-size: 27px;
             font-weight: bold;
             color: #80d69b;
         }
 
-        .tagline {
-            color: #b5c8bb;
-            font-size: 14px;
+        nav {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
         }
 
-        main {
-            max-width: 900px;
-            margin: 90px auto;
-            padding: 30px 24px;
+        nav a {
+            color: #c4d4c9;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #80d69b;
+        }
+
+        .hero {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 105px 24px 95px;
             text-align: center;
         }
 
         .welcome {
             color: #80d69b;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         h1 {
-            font-size: clamp(38px, 7vw, 64px);
-            margin-bottom: 20px;
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1.12;
+            margin-bottom: 25px;
         }
 
         h1 span {
@@ -66,54 +90,278 @@
         .intro {
             color: #b5c8bb;
             font-size: 18px;
-            line-height: 1.7;
-            max-width: 620px;
+            max-width: 650px;
             margin: 0 auto 35px;
         }
 
-        .notice {
+        .button {
             display: inline-block;
-            border: 1px solid #42634f;
-            background: #1a2b22;
-            color: #bde8c8;
-            padding: 14px 22px;
-            border-radius: 8px;
+            background: #80d69b;
+            color: #102019;
+            padding: 14px 28px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .button:hover {
+            background: #a1e9b5;
+        }
+
+        .section {
+            padding: 75px 8%;
+            text-align: center;
+        }
+
+        .section-dark {
+            background: #15241e;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .section-intro {
+            color: #b5c8bb;
+            max-width: 650px;
+            margin: 0 auto 42px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background: #1c3027;
+            border: 1px solid #345344;
+            border-radius: 12px;
+            padding: 30px 22px;
+        }
+
+        .step-number {
+            color: #80d69b;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .step h3 {
+            margin-bottom: 12px;
+            font-size: 19px;
+        }
+
+        .step p {
+            color: #b5c8bb;
             font-size: 14px;
         }
 
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            padding: 25px 18px;
+        }
+
+        .feature h3 {
+            color: #80d69b;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature p {
+            color: #b5c8bb;
+            font-size: 14px;
+        }
+
+        .faucet-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 38px 25px;
+            border: 1px solid #42634f;
+            background: #1a2b22;
+            border-radius: 12px;
+        }
+
+        .faucet-box p {
+            color: #bde8c8;
+            margin-top: 12px;
+        }
+
+        .status {
+            display: inline-block;
+            color: #80d69b;
+            border: 1px solid #42634f;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
         footer {
+            border-top: 1px solid #294137;
             text-align: center;
-            padding: 30px;
+            padding: 30px 20px;
             color: #82988a;
             font-size: 13px;
         }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 75px 22px;
+            }
+
+            .steps,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 22px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <header>
         <div class="logo">GrowDrops</div>
-        <div class="tagline">Small rewards. Big steps.</div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#why-growdrops">Why GrowDrops</a>
+            <a href="#faucet">Faucet</a>
+        </nav>
     </header>
 
     <main>
-        <p class="welcome">Welcome to GrowDrops</p>
+        <section class="hero" id="home">
+            <p class="welcome">Welcome to GrowDrops</p>
 
-        <h1>Small rewards.<br><span>Big steps.</span></h1>
+            <h1>
+                Small rewards.<br>
+                <span>Big steps.</span>
+            </h1>
 
-        <p class="intro">
-            Discover a simple way to start your crypto journey.
-            Every small step is part of something bigger.
-        </p>
+            <p class="intro">
+                Discover a simple way to start your crypto journey.
+                Every small step is part of something bigger.
+            </p>
 
-        <div class="notice">
-            Our faucet is currently under development.
-            Stay tuned!
-        </div>
+            <a class="button" href="#how-it-works">
+                Discover how it works
+            </a>
+        </section>
+
+        <section class="section section-dark" id="how-it-works">
+            <h2>How It Works</h2>
+
+            <p class="section-intro">
+                Getting started should be simple.
+                Our goal is to make every step easy to understand.
+            </p>
+
+            <div class="steps">
+                <article class="step">
+                    <div class="step-number">01</div>
+                    <h3>Get Ready</h3>
+                    <p>
+                        Prepare your FaucetPay account
+                        to receive cryptocurrency rewards.
+                    </p>
+                </article>
+
+                <article class="step">
+                    <div class="step-number">02</div>
+                    <h3>Make a Claim</h3>
+                    <p>
+                        Visit GrowDrops and follow
+                        the instructions to claim your reward.
+                    </p>
+                </article>
+
+                <article class="step">
+                    <div class="step-number">03</div>
+                    <h3>Collect Rewards</h3>
+                    <p>
+                        Receive your eligible rewards
+                        through the supported payment system.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="why-growdrops">
+            <h2>Why GrowDrops?</h2>
+
+            <p class="section-intro">
+                A simple starting point for exploring
+                the world of cryptocurrency.
+            </p>
+
+            <div class="features">
+                <article class="feature">
+                    <h3>Simple Experience</h3>
+                    <p>
+                        Clear instructions and an easy-to-use design.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <h3>Small Steps</h3>
+                    <p>
+                        Start small and learn as you go.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <h3>Built for Everyone</h3>
+                    <p>
+                        A welcoming experience for crypto beginners.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section-dark" id="faucet">
+            <div class="faucet-box">
+                <h2>The GrowDrops Faucet</h2>
+
+                <p>
+                    We are preparing the faucet.
+                    The claim system will be available soon.
+                </p>
+
+                <span class="status">Coming soon</span>
+            </div>
+        </section>
     </main>
 
     <footer>
-        © 2026 GrowDrops. All rights reserved.
+        <p>© 2026 GrowDrops. All rights reserved.</p>
+        <p>Small rewards. Big steps.</p>
     </footer>
 
 </body>
