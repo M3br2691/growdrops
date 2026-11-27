@@ -215,7 +215,48 @@
             color: #82988a;
             font-size: 13px;
         }
+        .claim-form {
+            max-width: 500px;
+            margin: 30px auto 0;
+            text-align: left;
+        }
 
+        .claim-form label {
+            display: block;
+            color: #d4e6d9;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .claim-form input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #42634f;
+            border-radius: 7px;
+            background: #101b18;
+            color: #f2f7f3;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .claim-form input:focus {
+            outline: 2px solid #80d69b;
+        }
+
+        .claim-button {
+            width: 100%;
+            border: none;
+            cursor: not-allowed;
+            opacity: 0.65;
+            font-family: inherit;
+        }
+
+        .claim-note {
+            color: #82988a;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 15px;
+        }
         @media (max-width: 700px) {
             header {
                 flex-direction: column;
@@ -349,12 +390,28 @@
             <div class="faucet-box">
                 <h2>The GrowDrops Faucet</h2>
 
-                <p>
-                    We are preparing the faucet.
-                    The claim system will be available soon.
-                </p>
-
                 <span class="status">Coming soon</span>
+
+<form class="claim-form">
+    <label for="wallet">Your FaucetPay email or wallet address</label>
+
+    <input
+        type="text"
+        id="wallet"
+        name="wallet"
+        placeholder="Enter your FaucetPay address"
+        autocomplete="off"
+        disabled
+    >
+
+    <button class="button claim-button" type="button" disabled>
+        Claim Now
+    </button>
+
+    <p class="claim-note">
+        The claim system is currently under development.
+    </p>
+</form>
             </div>
         </section>
     </main>
