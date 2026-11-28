@@ -257,6 +257,56 @@
             text-align: center;
             margin-top: 15px;
         }
+         .auth-box {
+            max-width: 500px;
+            margin: 40px auto 0;
+            padding: 30px;
+            background: #1a2b22;
+            border: 1px solid #42634f;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .auth-form label {
+            display: block;
+            color: #d4e6d9;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #42634f;
+            border-radius: 7px;
+            background: #101b18;
+            color: #f2f7f3;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .auth-form input:focus {
+            outline: 2px solid #80d69b;
+        }
+
+        .auth-button {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .auth-message {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 15px;
+            color: #b5c8bb;
+        }
         @media (max-width: 700px) {
             header {
                 flex-direction: column;
@@ -386,6 +436,75 @@
             </div>
         </section>
 
+                <section class="section section-dark" id="account">
+            <h2>Your GrowDrops Account</h2>
+
+            <p class="section-intro">
+                Create an account or log in to continue.
+            </p>
+
+            <div class="auth-box">
+                <h2>Create an Account</h2>
+
+                <form class="auth-form" id="register-form">
+                    <label for="register-email">Email address</label>
+                    <input
+                        type="email"
+                        id="register-email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <label for="register-password">Password</label>
+                    <input
+                        type="password"
+                        id="register-password"
+                        name="password"
+                        minlength="12"
+                        maxlength="128"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button class="button auth-button" type="submit">
+                        Create Account
+                    </button>
+
+                    <p class="auth-message" id="register-message" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+
+            <div class="auth-box">
+                <h2>Log In</h2>
+
+                <form class="auth-form" id="login-form">
+                    <label for="login-email">Email address</label>
+                    <input
+                        type="email"
+                        id="login-email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <label for="login-password">Password</label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button class="button auth-button" type="submit">
+                        Log In
+                    </button>
+
+                    <p class="auth-message" id="login-message" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
         <section class="section section-dark" id="faucet">
             <div class="faucet-box">
                 <h2>The GrowDrops Faucet</h2>
@@ -438,7 +557,99 @@
             console.error("Could not connect to GrowDrops backend:", error);
         }
     }
+    const registerForm = document.getElementById("register-form");
 
+    registerForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("register-email").value;
+        const password = document.getElementById("register-password").value;
+        const message = document.getElementById("register-message");
+
+        message.textContent = "Creating your account...";
+
+        try {
+            const response = await fetch(`${BACKEND_URL}/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Registration failed");
+            }
+
+            message.textContent = data.message;
+            registerForm.reset();
+
+        } catch (error) {
+            message.textContent = error.message;
+        }
+    });
+    const loginForm = document.getElementById("login-form");
+
+    let authToken = null;
+
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+        const message = document.getElementById("login-message");
+
+        message.textContent = "Logging in...";
+
+        try {
+            const response = await fetch(`${BACKEND_URL}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Login failed");
+            }
+
+            authToken = data.token;
+            await checkSession();
+            message.textContent = "Login successful.";
+
+            loginForm.reset();
+
+        } catch (error) {
+            message.textContent = error.message;
+        }
+    });
+    async function checkSession() {
+        if (!authToken) {
+            throw new Error("No active session.");
+        }
+
+        const response = await fetch(`${BACKEND_URL}/me`, {
+            headers: {
+                "Authorization": `Bearer ${authToken}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            authToken = null;
+            throw new Error(data.error || "Session invalid");
+        }
+
+        console.log("Authenticated user:", data);
+
+        return data;
+    }
     checkBackend();
 </script>
 </body>
